@@ -7,7 +7,7 @@ extern "C" {
 
 #include <stdint.h>
 
-void rfv2_hash(const char* input, char* output, uint32_t len);
+void rfv2_hash_yiimp(const char* input, char* output, uint32_t len);
 
 #ifdef __cplusplus
 }
