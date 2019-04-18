@@ -1,5 +1,5 @@
-#ifndef RAINFOREST_H
-#define RAINFOREST_H
+#ifndef RFV2_H
+#define RFV2_H
 
 #ifdef __cplusplus
 extern "C" {
