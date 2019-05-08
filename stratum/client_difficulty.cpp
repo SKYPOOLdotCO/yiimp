@@ -4,7 +4,7 @@
 double client_normalize_difficulty(double difficulty)
 {
 	if(difficulty < g_stratum_min_diff) difficulty = g_stratum_min_diff;
-	else if(difficulty < 1) difficulty = floor(difficulty*1000/2)/1000*2;
+	else if(difficulty < 1) difficulty = floor(difficulty*100000000/2)/100000000*2;
 	else if(difficulty > 1) difficulty = floor(difficulty/2)*2;
 	if(difficulty > g_stratum_max_diff) difficulty = g_stratum_max_diff;
 	return difficulty;
@@ -59,10 +59,10 @@ void client_adjust_difficulty(YAAMP_CLIENT *client)
 	else if(client->difficulty_fixed)
 		return;
 
-	else if(client->shares_per_minute > 25)
+	else if(client->shares_per_minute > 20)
 		client_change_difficulty(client, client->difficulty_actual*2);
 
-	else if(client->shares_per_minute > 20)
+	else if(client->shares_per_minute > 15)
 		client_change_difficulty(client, client->difficulty_actual*1.5);
 
 	else if(client->shares_per_minute <  5)
@@ -77,7 +77,7 @@ int client_send_difficulty(YAAMP_CLIENT *client, double difficulty)
 	if(difficulty >= 1)
 		client_call(client, "mining.set_difficulty", "[%.0f]", difficulty);
 	else
-		client_call(client, "mining.set_difficulty", "[%.3f]", difficulty);
+		client_call(client, "mining.set_difficulty", "[%.8f]", difficulty);
 	return 0;
 }
 
